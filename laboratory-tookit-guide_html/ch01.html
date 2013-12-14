@@ -1,0 +1,109 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 1.  What is the Laboratory Toolkit, why should I use it?</title><link rel="stylesheet" type="text/css" href="css/style.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="Laboratory Toolkit Guide"><link rel="up" href="index.html" title="Laboratory Toolkit Guide"><link rel="prev" href="index.html" title="Laboratory Toolkit Guide"><link rel="next" href="ch01s02.html" title="For what kind of applications can I use the Laboratory Toolkit?"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. 
+      What is the <span class="application">Laboratory Toolkit</span>, why should I use it?
+    </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch01s02.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="idp55840"></a>Chapter 1. 
+      What is the <span class="application">Laboratory Toolkit</span>, why should I use it?
+    </h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="ch01.html#idp59152">When do I need the Laboratory Toolkit?</a></span></dt><dd><dl><dt><span class="section"><a href="ch01.html#idp86912">How it's done without the <span class="application">Laboratory Toolkit</span></a></span></dt><dt><span class="section"><a href="ch01.html#idp89872">How it's done with the <span class="application">Laboratory Toolkit</span></a></span></dt></dl></dd><dt><span class="section"><a href="ch01s02.html">For what kind of applications can I use the <span class="application">Laboratory Toolkit</span>?</a></span></dt></dl></div><p>
+      The <span class="application">Laboratory Toolkit</span> is a small <span class="productname">Java SE</span> framework that provides a comfortable, highly generic, and very flexible API for implementing algorithms that process initial data through multiple analyses with non-trivial dependencies between them.
+    </p><p> It does so by contextualizing the access to the various steps of the algorithm, and managing the computation and storage of their results. It relieves the developer by separating the concerns of declaring how the steps of the algorithm are computed and of requesting their results when they are externally needed. Finally, it altogether suppresses the burdens of externally requesting the computing of the intermediate steps of the algorithm and of passing along their results from one to the other.
+    </p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp59152"></a>When do I need the Laboratory Toolkit?</h2></div></div></div><p>
+	In a lot of sitations, computing and retrieving the result of an algorithm is fairly straightforward to code, because the algorithm itself has a simple and fixed design. These are situations where the algorithm typically presents a pipe-like structure, with a few sequential intermediate steps, as is shown in <a class="xref" href="ch01.html#pipe_algo" title="Figure 1.1. A simple algorithm with a pipe design">Figure 1.1, &#8220;A simple algorithm with a pipe design&#8221;</a>.
+	</p><div class="figure"><a name="pipe_algo"></a><p class="title"><b>Figure 1.1. A simple algorithm with a pipe design</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/pipe_algo.png" width="1080" alt="A simple algorithm with a pipe design"></div></div></div><p><br class="figure-break">
+	Implementation of such an algorithm is quite easy to code. You will, say, write a method for computing each step of the algorithm, maybe wrap each of these methods in separate classes to achieve a modular design, and invoke each of them sequentially to obtain the result in client code. That may lead to something like this :
+	</p><pre class="programlisting">
+	  public FinalResult processInitialData(InitialData myInitialData){
+	      //process ResultA from InitialData
+	      ResultA resultA = new Step1(myInitialData).getResultA();
+	      
+	      //obtain other results
+	      ResultB resultB = new Step2().getResultB(resultA);
+	      ResultC resultC = new Step3().getResultC(resultB);
+	      ResultD resultD = new Step4().getResultD(resultB);
+	      
+	      //obtain the final result
+	      FinalResult result = new FinalStep().getFinalResult(resultC, resultD);
+	      return result;
+	  }
+	</pre><p>
+      </p><p>
+	Unfortunately, in many cases things are much more complicated. Your may have an algorithm with many steps, with mutiple and complex dependencies. Worse, these set of steps and their dependencies might evolve overtime, because the design of your algorithm is of yet fixed; you may even not know what final results you want to compute, only what kind of preliminary results they are going to need. And when you do (and you will) make a small change in your design, you don't want it to cascade in all the places in your code where the steps of your algorithm are implemented or invoked.</p><p>
+  Imagine now that the design of your algorithm looks like this :
+	</p><div class="figure"><a name="complex_algo"></a><p class="title"><b>Figure 1.2. A complex algorithm with a yet-unfixed design</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/complex_algo.png" width="810" alt="A complex algorithm with a yet-unfixed design"></div></div></div><p><br class="figure-break">
+	</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+	    The set of the steps of the algorithm and their dependencies form what is called a <abbr class="abbrev">DAG</abbr> (Directed Acyclic Graph), which means that there are no circular dependencies among the steps of the algorithm (i.e they are not recursive).
+	  </p></div><p>
+	Terrifying, right? That's usually the point where the developer starts hating his/her algorithm. There are several challenges here :
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+	      There are several outputs to this algorithm. If the computing of the previous steps of the algorithm is done naively, things will get computed several times.
+	    </p></li><li class="listitem"><p>
+	      Some steps of the algorithm may require access to more preliminary results than they currently do.
+	    </p></li><li class="listitem"><p>
+	      Other steps or outputs may be added in the future. Some results that are yet considered as preliminary results may become outputs as well.
+	    </p></li></ul></div><p>
+	Now let's see how this is handled without and with the <span class="application">Laboratory Toolkit</span>.
+      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idp86912"></a>How it's done without the <span class="application">Laboratory Toolkit</span></h3></div></div></div><p>
+	  There seem to be 2 sorts of solution, both of which are rather gloomy. 
+	</p><p>
+	  One the one hand, you can keep a design with several classes, but that will probably lead to hideous methods signatures, and storing the results of the steps that need to be requested several times is likely to be a real nightmare.
+	</p><p>
+	  On the other hand, you can put everything in the same class, with instance variables for holding the results of the various steps of the algorithm, and methods for the steps of the algorithm. But you will lose all the benefits of object-orientation, and you will still have to enforce the facts that the results are stored and computed in the right order; plus, you will end up with a single monolithic class.
+	</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idp89872"></a>How it's done with the <span class="application">Laboratory Toolkit</span></h3></div></div></div><p>
+	  None of the 2 approaches above is quite satisfactory. The <span class="application">Laboratory Toolkit</span> gives you the best of both worlds. You separately define each step of your algorithm by extending a class called <code class="classname">Analysis</code>, in which you declare what preliminayry results your computation require. Then, in your client code, you request your final results to be computed in a contextual object called a <code class="classname">Laboratory</code>. It's as simple as this :
+	  </p><pre class="programlisting">
+	   /*
+	    * The client code.
+	    */
+	    //creating the contextual Laboratory (myLabEquipment is a custom class which contains the initial data.)
+	    Laboratory lab = new Laboratory(myLabEquipment);
+	    
+	    //requesting the results. 
+	    FinalResult1 result1 = FinalStep1.getInstance().getResult(lab);
+	    FinalResutl2 result2 = FinalStep2.getInstance().getResult(lab);
+	  </pre><p>
+	  Implementing all the steps of the algorithm requires minimal effort from the developer, that is providing access to the initial data in the <code class="classname">Laboratory</code> context, and defining how the result of each step is computed. It looks like this (don't worry if you don't understand all of it yet):
+	</p><pre class="programlisting">
+	  /**
+	   * Custom equipment class, providing access to the initial data.
+	   */
+	   public class MyLabEquipment extends Laboratory{
+	       private final InitialData initialData;
+	       
+	       //gives access to the initial data.
+	       public InitialData initialData(){
+	           return this.initialData;
+	       }
+
+	       [...]
+
+	   }
+	</pre><p>
+	And now how each step of the algorith is defined, for instance Step 5 of the above example :
+	</p><pre class="programlisting">
+	  //Subclass of Analysis that only needs to override 1 method :
+	  public class Step5 extends Analysis&lt;ResultE, MyLabEquipment&gt;{
+	      
+	      //That methods is called from the Laboratory when the result needs to be computed (i.e once in a Laboratory's lifecycle).
+	      @Override
+	      protected ResultE computeResult(ResultComputingContext&lt;MyLabEquipment&gt; context){
+	          
+	          //fetching the preliminary results from the context provided by the Laboratory
+	          InitialData initialData = context.equipment().initialData();
+		  ResultA resultA = context.preliminaryResult(Step1.getInstance());
+		  ResultB resultB = context.preliminaryResult(Step2.getInstance());
+
+		  //computing the result from the preliminary results.
+		  [...]
+		  ResultE resultE = [...]
+
+		  //returning the computed result
+		  return resultE;
+	      }
+
+	      //Analysis subclasses are usually implemented as Singletons.
+	      public static Step5 getInstance(){
+	      [...]
+	  }
+	</pre><p>
+	That's it, that's all it takes! You didn't have to previously request the preliminary results. You didn't have to cache the computed results. All you had to do was requesting the results you wanted whenever you wanted them, and all the rest was managed.
+	</p><p>
+	  As you can see, you only had to deal with 3 <span class="application">Laboratory Toolkit</span> classes : the <code class="classname">Laboratory</code> class, the <code class="classname">Analysis</code> abstract class, and the <code class="classname">ResultComputingContext</code> interface. Of these classes, you had to implement 1 method (<code class="code">Analysis.computeResult()</code>) and invoke 3 other (<code class="code">ResultComputingContext.preliminaryResult(), ResultcomputingContext.equipment()</code> and <code class="code">Analysis.getResult(lab)</code>). Well, although there are more, that's pretty much all there is to know in the API for the great majority of situations. If you've understood the above code, you might as well get started using the <span class="application">Laboratory Toolkit</span> right away.
+	</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch01s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Laboratory Toolkit Guide </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> For what kind of applications can I use the <span class="application">Laboratory Toolkit</span>?</td></tr></table></div></body></html>
