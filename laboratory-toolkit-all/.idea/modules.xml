@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/laboratory-samples/laboratory-samples.iml" filepath="$PROJECT_DIR$/laboratory-samples/laboratory-samples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-toolkit/laboratory-toolkit.iml" filepath="$PROJECT_DIR$/laboratory-toolkit/laboratory-toolkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-toolkit-all.iml" filepath="$PROJECT_DIR$/laboratory-toolkit-all.iml" />
+    </modules>
+  </component>
+</project>
+

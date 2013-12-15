@@ -8,6 +8,6 @@
   <name>laboratory-toolkit-all</name>
     <modules>
         <module>laboratory-toolkit</module>
-        <module>laboratory-samples</module>
+        <module>laboratory-examples</module>
     </modules>
 </project>
