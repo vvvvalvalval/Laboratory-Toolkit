@@ -15,5 +15,6 @@
         <module>integer</module>
     <module>search-engine</module>
     <module>accounting</module>
+    <module>text</module>
   </modules>
 </project>
