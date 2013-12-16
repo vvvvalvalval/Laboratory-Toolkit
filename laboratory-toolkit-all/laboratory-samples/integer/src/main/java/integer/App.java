@@ -19,11 +19,11 @@ import integer.primes.FindingAllDivisors;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
- * Hello world!
+ * A sample application that uses the Laboratory Toolkit to perform a variety of
+ * {@link Analysis} on a positive integer, such as prime factors decomposition.
  *
  */
 public class App {
@@ -50,18 +50,18 @@ public class App {
         System.out.println("We're looking at n=" + n);
 
         System.out.println("");
-        System.out.println("n in base 10:");
-        System.out.println(inBase10.getResult(lab));
-        System.out.println("n in base 16:");
-        System.out.println(inBase16.getResult(lab));
-        System.out.println("n in base 8:");
-        System.out.println(inBase8.getResult(lab));
-        System.out.println("n in base 7:");
-        System.out.println(inBase7.getResult(lab));
-        System.out.println("n in base 12:");
-        System.out.println(inBase12.getResult(lab));
-        System.out.println("n in base 51:");
-        System.out.println(inBase51.getResult(lab));
+        System.out.println("n in base 10: ");
+        System.out.print(inBase10.getResult(lab));
+        System.out.println("n in base 16: ");
+        System.out.print(inBase16.getResult(lab));
+        System.out.println("n in base 8: ");
+        System.out.print(inBase8.getResult(lab));
+        System.out.println("n in base 7: ");
+        System.out.print(inBase7.getResult(lab));
+        System.out.println("n in base 12: ");
+        System.out.print(inBase12.getResult(lab));
+        System.out.println("n in base 51: ");
+        System.out.print(inBase51.getResult(lab));
 
         System.out.println("");
         System.out.println("Is " + n + " a perfect number?");

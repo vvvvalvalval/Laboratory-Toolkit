@@ -41,7 +41,7 @@ public class TextMain {
         WordsExtracting.getInstance().getResult(myLab);
     }
     
-    private static void protocalAnalysis(){
+    private static void protocolAnalysis(){
         Analysis<WordsScore, TextLabEquipment> myModularAnalysis = new AnalysisWithProtocol<>(
                 new PlusOneSquaredWordsScoringProtocol(
                 new FrequenciesWordsScoringProtocol()));
