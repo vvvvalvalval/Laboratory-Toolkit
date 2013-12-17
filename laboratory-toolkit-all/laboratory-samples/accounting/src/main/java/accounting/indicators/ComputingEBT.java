@@ -24,7 +24,7 @@ public class ComputingEBT extends Analysis<Double, AccountingEquipment> {
         double ebit = context.preliminaryResult(ComputingEBIT.getInstance());
 
         IncomeStatement incomeStatement = context.equipment().incomeStatement();
-        double financialIncome = incomeStatement.financialIncome();
+        double financialIncome = incomeStatement.financialRevenues();
         double financialExpenses = incomeStatement.financialExpenses();
 
         double ebt = ebit + financialIncome - financialExpenses;

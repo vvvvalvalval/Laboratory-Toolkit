@@ -4,13 +4,16 @@
  */
 package accounting.equipment;
 
+import accounting.documents.BalanceSheet;
 import accounting.documents.IncomeStatement;
 
 /**
- *
+ * 
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
 public interface AccountingEquipment {
 
     public IncomeStatement incomeStatement();
+    
+    public BalanceSheet balanceSheet();
 }

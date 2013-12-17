@@ -18,7 +18,7 @@ public interface IncomeStatement {
     public double amortizations();
     public double provisions();
     
-    public double financialIncome();
+    public double financialRevenues();
     public double financialExpenses();
     
     public double incomeTax();

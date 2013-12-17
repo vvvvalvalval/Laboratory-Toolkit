@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/laboratory-samples/accounting/accounting.iml" filepath="$PROJECT_DIR$/laboratory-samples/accounting/accounting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-samples/integer/integer.iml" filepath="$PROJECT_DIR$/laboratory-samples/integer/integer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-examples/laboratory-examples.iml" filepath="$PROJECT_DIR$/laboratory-examples/laboratory-examples.iml" />
       <module fileurl="file://$PROJECT_DIR$/laboratory-samples/laboratory-samples.iml" filepath="$PROJECT_DIR$/laboratory-samples/laboratory-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/laboratory-toolkit/laboratory-toolkit.iml" filepath="$PROJECT_DIR$/laboratory-toolkit/laboratory-toolkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/laboratory-toolkit-all.iml" filepath="$PROJECT_DIR$/laboratory-toolkit-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-samples/search-engine/search-engine.iml" filepath="$PROJECT_DIR$/laboratory-samples/search-engine/search-engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laboratory-samples/text/text.iml" filepath="$PROJECT_DIR$/laboratory-samples/text/text.iml" />
     </modules>
   </component>
 </project>
