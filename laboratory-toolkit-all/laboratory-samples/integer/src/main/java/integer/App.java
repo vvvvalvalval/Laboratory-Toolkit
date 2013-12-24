@@ -19,7 +19,11 @@ import integer.primes.FindingAllDivisors;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * A sample application that uses the Laboratory Toolkit to perform a variety of
@@ -32,6 +36,7 @@ public class App {
         show(15);
         show(66);
         show(8 * 9 * 5 * 169);
+        show(47);
         show(2);
         show(28);
     }
@@ -50,26 +55,27 @@ public class App {
         System.out.println("We're looking at n=" + n);
 
         System.out.println("");
-        System.out.println("n in base 10: ");
-        System.out.print(inBase10.getResult(lab));
-        System.out.println("n in base 16: ");
-        System.out.print(inBase16.getResult(lab));
-        System.out.println("n in base 8: ");
-        System.out.print(inBase8.getResult(lab));
-        System.out.println("n in base 7: ");
-        System.out.print(inBase7.getResult(lab));
-        System.out.println("n in base 12: ");
-        System.out.print(inBase12.getResult(lab));
-        System.out.println("n in base 51: ");
-        System.out.print(inBase51.getResult(lab));
+        System.out.print("n in base 10: ");
+        System.out.println(inBase10.getResult(lab));
+        System.out.print("n in base 16: ");
+        System.out.println(inBase16.getResult(lab));
+        System.out.print("n in base 8: ");
+        System.out.println(inBase8.getResult(lab));
+        System.out.print("n in base 7: ");
+        System.out.println(inBase7.getResult(lab));
+        System.out.print("n in base 12: ");
+        System.out.println(inBase12.getResult(lab));
+        System.out.print("n in base 51: ");
+        System.out.println(inBase51.getResult(lab));
 
         System.out.println("");
-        System.out.println("Is " + n + " a perfect number?");
+        System.out.println("Is " + n + " a perfect number? (i.e is it equal to the sum of its strict divisors?)");
         System.out.println("The answer is " + (CheckingIfPerfectNumber.getInstance().getResult(lab) ? "yes" : "no") + ".");
 
         System.out.println("");
-        System.out.println("Prime decomposition");
-        System.out.println(CalculatingPrimeDecomposition.getInstance().getResult(lab));
+        System.out.println("Prime decomposition :");
+        Map<Integer, Integer> primeDecomposition = CalculatingPrimeDecomposition.getInstance().getResult(lab);
+        System.out.println(printPrimeDecomposition(n, primeDecomposition));
 
         System.out.println("");
         System.out.println("Here are the positive divisors of " + n + ":");
@@ -77,7 +83,7 @@ public class App {
 
         System.out.println("");
         ModuloNRing moduloNRing = FormingModuloNRing.getInstance().getResult(lab);
-        System.out.println("Let's do some operations in the modulo-" + n + " ring:");
+        System.out.println("Let's do some operations in Z/"+n+"Z, the modulo-" + n + " ring:");
         System.out.println("Additions :");
         for (int i = 0; i < 5; i++) {
             int a = pickAtRandom(moduloNRing.elements());
@@ -121,7 +127,7 @@ public class App {
         }
 
         System.out.println("");
-        System.out.println("Now, let's play with the group of invertibles of Z/" + n + "Z : ");
+        System.out.println("Now, let's play with the multiplicative Group of Invertibles of Z/" + n + "Z : ");
         System.out.println("Its elements are : ");
         System.out.println(FormingInvertiblesGroup.getInstance().getResult(lab).elements());
         System.out.println("Some multiplications : ");
@@ -157,5 +163,22 @@ public class App {
             iterator.next();
         }
         return iterator.next();
+    }
+
+    private static String printPrimeDecomposition(int n, Map<Integer, Integer> primeDecomposition) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(n).append(" = ");
+        Iterator<Map.Entry<Integer, Integer>> itr = new TreeMap<>(primeDecomposition).entrySet().iterator();
+        if (itr.hasNext()) {
+            Map.Entry<Integer, Integer> entry = itr.next();
+            sb.append(entry.getKey()).append("^").append(entry.getValue());
+        }
+        while (itr.hasNext()) {
+            Map.Entry<Integer, Integer> entry = itr.next();
+            sb
+                    .append(" * ")
+                    .append(entry.getKey()).append("^").append(entry.getValue());
+        }
+        return sb.toString();
     }
 }
