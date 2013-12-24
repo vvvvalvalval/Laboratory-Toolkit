@@ -6,6 +6,7 @@ package integer.decimal;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class RepresentingInNumeralSystem extends Analysis<List<Integer>, IntegerEquipment> {
+public class RepresentingInNumeralSystem extends SimpleAnalysis<List<Integer>, IntegerEquipment> {
 
     private final int radix;
 

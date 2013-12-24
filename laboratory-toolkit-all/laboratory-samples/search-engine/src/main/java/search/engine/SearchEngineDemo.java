@@ -5,8 +5,8 @@
 package search.engine;
 
 import edu.polytechnique.labtk.Analysis;
+import edu.polytechnique.labtk.AnalysisWithProtocol;
 import edu.polytechnique.labtk.Laboratory;
-import edu.polytechnique.labtk.protocols.AnalysisWithProtocol;
 import search.engine.equipment.DocumentsEquipment;
 import search.engine.fixture.HardCodedDocuments;
 import search.engine.queries.ObtainingQueryRunner;

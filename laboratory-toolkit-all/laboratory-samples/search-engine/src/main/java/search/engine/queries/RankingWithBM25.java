@@ -6,6 +6,7 @@ package search.engine.queries;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import search.engine.termsindex.CalculatingInvertedTermFrequency;
 import search.engine.termsindex.ComputingAverageDocumentLength;
@@ -29,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class RankingWithBM25 extends Analysis<QueryProcessor, TermsIndexingEquipment> {
+public class RankingWithBM25 extends SimpleAnalysis<QueryProcessor, TermsIndexingEquipment> {
 
     /*
      * Parameters for the algorithm

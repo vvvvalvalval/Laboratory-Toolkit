@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import search.engine.equipment.Document;
@@ -17,7 +18,7 @@ import search.engine.equipment.Document;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CalculatingTfIdf extends Analysis<TermDocumentWeight, TermsIndexingEquipment> {
+public class CalculatingTfIdf extends SimpleAnalysis<TermDocumentWeight, TermsIndexingEquipment> {
 
     @Override
     protected TermDocumentWeight computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {

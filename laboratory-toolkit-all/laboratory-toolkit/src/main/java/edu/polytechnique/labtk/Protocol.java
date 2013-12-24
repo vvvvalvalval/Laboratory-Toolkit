@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.polytechnique.labtk.protocols;
+package edu.polytechnique.labtk;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.Laboratory;

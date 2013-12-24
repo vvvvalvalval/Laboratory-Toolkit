@@ -6,6 +6,7 @@ package text;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Set;
 /**
  * {@link Analysis} that extracts words frequencies information from text.
  */
-public class WordsFrequenciesCalculating extends Analysis<WordsFrequencies, TextLabEquipment> {
+public class WordsFrequenciesCalculating extends SimpleAnalysis<WordsFrequencies, TextLabEquipment> {
 
     @Override
     protected WordsFrequencies computeResult(ResultComputingContext<? extends TextLabEquipment> context) {

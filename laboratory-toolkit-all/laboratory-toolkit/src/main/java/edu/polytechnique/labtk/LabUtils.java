@@ -6,7 +6,6 @@ package edu.polytechnique.labtk;
 
 import edu.polytechnique.labtk.exporter.ExportStrategy;
 import edu.polytechnique.labtk.exporter.ResultExporter;
-import edu.polytechnique.labtk.protocols.Protocol;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -286,7 +285,7 @@ public final class LabUtils {
      * parameterized result.
      */
     public static <R, E> Analysis<R, E> newConstantAnalysis(final R result) {
-        return new Analysis<R, E>() {
+        return new SimpleAnalysis<R, E>() {
             @Override
             protected R computeResult(ResultComputingContext<? extends E> context) {
                 return result;

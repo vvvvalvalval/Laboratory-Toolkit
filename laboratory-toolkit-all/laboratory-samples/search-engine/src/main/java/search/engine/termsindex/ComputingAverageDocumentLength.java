@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  * {@link Analysis} that computes the average length of documents.
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class ComputingAverageDocumentLength extends Analysis<Double, TermsIndexingEquipment>{
+public class ComputingAverageDocumentLength extends SimpleAnalysis<Double, TermsIndexingEquipment>{
     
     private static final Logger logger = Logger.getLogger(ComputingAverageDocumentLength.class.getName());
     

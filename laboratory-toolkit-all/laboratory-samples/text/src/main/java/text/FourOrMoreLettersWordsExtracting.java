@@ -6,6 +6,7 @@ package text;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * {@link Analysis} that extracts all the words of the text but those with less than 4 letters.
  */
-public class FourOrMoreLettersWordsExtracting extends Analysis<List<String>, TextLabEquipment>{
+public class FourOrMoreLettersWordsExtracting extends SimpleAnalysis<List<String>, TextLabEquipment>{
     
     private FourOrMoreLettersWordsExtracting() {
     }

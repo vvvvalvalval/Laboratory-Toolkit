@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import search.engine.tokenization.Token;
 import java.util.Collection;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CalculatingInvertedTermFrequency extends Analysis<TermWeight, TermsIndexingEquipment> {
+public class CalculatingInvertedTermFrequency extends SimpleAnalysis<TermWeight, TermsIndexingEquipment> {
 
 
     @Override

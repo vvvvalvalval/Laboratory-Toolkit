@@ -4,8 +4,8 @@
  */
 package text;
 
-import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Analysis that extracts the words from the raw text.
  */
-public class WordsExtracting extends Analysis<List<String>, TextLabEquipment> {
+public class WordsExtracting extends SimpleAnalysis<List<String>, TextLabEquipment> {
 
     //this method defines of the extracting of the words is performed.
     @Override

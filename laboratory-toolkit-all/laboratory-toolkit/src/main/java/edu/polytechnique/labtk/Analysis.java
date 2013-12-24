@@ -4,9 +4,6 @@
  */
 package edu.polytechnique.labtk;
 
-import edu.polytechnique.labtk.protocols.AnalysisWithProtocol;
-import edu.polytechnique.labtk.protocols.Protocol;
-
 /**
  * An {@link Analysis} represents a method of computing a certain result, using
  * a certain equipmnent, in the context of one or several {@link Laboratory}S,
@@ -14,7 +11,7 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * {@link Analysis}S that operate with application-specific equipment.
  * <p>
  * An {@link Analysis} computes a <em>result</em> using a certain
- * <em>equipment</em>. The equipment is meant to include input data for the
+ * <em>equipment</em>. The <em>equipment</em> is meant to include input data for the
  * {@link Analysis} to work with, and possibly references to other
  * {@link Analysis}S from which to obtain preliminary results.
  * </p>
@@ -23,7 +20,7 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * {@link Laboratory} collaborates with the {@link Analysis} in 3 different
  * manners :
  * <ul>
- * <li>it provides the {@link Analysis} the equipment with which to compute its
+ * <li>it provides the {@link Analysis} the <em>equipment</em> with which to compute its
  * result, as well as a way of obtaining preliminary results from other
  * {@link Analysis}.</li>
  * <li>it stores the result of the {@link Analysis} once computed to make it
@@ -31,6 +28,27 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * <li>it provides the result of the {@link Analysis} to the other
  * {@link Analysis} that require it in their computation.</li>
  * </ul>
+ * </p>
+ * <p>
+ * An {@link Analysis} always has a {@link Protocol} which performs the
+ * computation of its result. The {@link Protocol} is where the algorithmic work
+ * of the {@link Analysis} is done. When requested to compute its result by a
+ * {@link Laboratory}, an {@link Analysis} <em>always</em> delegates the
+ * computation to its {@link Protocol}; behind the scenes, in addition to
+ * wrapping a {@link Protocol} object, the {@link Analysis} class features
+ * built-in logic to communicate with {@link Laboratory}s. The {@link Protocol}
+ * that is used for computing the result is the one returned by the
+ * {@link #protocol()} method.
+ * </p>
+ * <p>
+ * Although the {@link Analysis} class is designed for inheritance, there is
+ * hardly any reason for a client to subclass it directly. In the majority of
+ * situations, client code will declare its {@link Analysis}S by extending the
+ * {@link SimpleAnalysis} class, which is a convenient way to declare an
+ * {@link Analysis} and its {@link Protocol} at the same time. In the few cases
+ * where flexibility requires to separately define the {@link Protocol}, the
+ * {@link Analysis} should be declared by extending the
+ * {@link AnalysisWithProtocol} class.
  * </p>
  * <p>
  * Even if it is externally requested (with the
@@ -56,7 +74,7 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * <li>Implement the {@link Analysis} subclass using the Singleton pattern, to
  * enforce that only one instance of this {@link Analysis} subclass can be used
  * by any {@link Laboratory}. This is a simple and common solution</li>
- * <li>Make the {@link Analysis} a property of the equipment of the
+ * <li>Make the {@link Analysis} a property of the <em>equipment</em> of the
  * {@link Laboratory}. This is a more advanced and flexible solution. It still
  * avoids duplication of {@link Analysis} instance, but it adds a level of
  * indirection as to what {@link Analysis} will actually be used for arriving to
@@ -76,20 +94,14 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * allowed. If a circular dependency is detected at runtime, the contextual
  * {@link Laboratory} will throw a RuntimeException.
  * </p>
- * <p>
- * Better flexibility can be achieved using the {@link AnalysisWithProtocol}
- * class instead of subclassing {@link Analysis}. Indeed,
- * {@link AnalysisWithProtocol} relies on object composition (to a
- * {@link Protocol}) instead of class inheritance to declare how the result is
- * computed.
- * </p>
  *
- * @param <R> the type of the result : may be any object.
- * @param <E> the type of the equipment that is required for this
- * {@link Analysis} (may be any object, recommended to be declared as an
+ * @param <R> the type of the result : may be any Java type.
+ * @param <E> the type of the <em>equipment</em> that is required for this
+ * {@link Analysis} (may be any Java type, recommended to be declared as an
  * interface).
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  * @see Laboratory
+ * @see SimpleAnalysis
  * @see AnalysisWithProtocol
  * @see ResultComputingContext
  */
@@ -107,7 +119,7 @@ public abstract class Analysis<R, E> {
      * {@link ResultComputingContext#preliminaryResult(Analysis)} instead.</p>
      *
      * @param lab a {@link Laboratory} to be used as a context for computing or
-     * retrieving the result, which contains enough equipment for this
+     * retrieving the result, which contains the appropriate equipment for this
      * {@link Analysis}.
      * @return the result corresponding to this {@link Analysis}.
      * @throws NullPointerException if the parameterized {@link Laboratory} is
@@ -155,51 +167,30 @@ public abstract class Analysis<R, E> {
         if (lab == null) {
             throw new NullPointerException();
         }
-        return this.computeResult(new ResultComputingContextImpl<>(lab, this));
+        return this.protocol().computeResult(new ResultComputingContextImpl<>(lab, this));
     }
 
     /**
-     * Computes the result of this {@link Analysis} in the context of a
-     * particular {@link Laboratory}, implicitely represented by the
-     * parameterized {@link ResultComputingContext}.
-     * <p>A client subclass of {@link Analysis} implements this method, and uses
-     * the provided {@link ResultComputingContext} to access the required
-     * equipment and obtain preliminary results from other {@link Analysis}.</p>
+     * The {@link Protocol} through which this {@link Analysis} performs the
+     * computation of its result when requested by a {@link Laboratory}. This
+     * method is invoked when a {@link Laboratory} requests this
+     * {@link Analysis} to compute its result in its context.
+     * <p>
+     * The general contract for this method is that the {@link Protocol}s it
+     * returns be non-null, stateless, and always have the same behavior over
+     * time. The usual implementations of this method (i.e in the
+     * {@link SimpleAnalysis} and {@link AnalysisWithProtocol} classes), this
+     * method always returns the same {@link Protocol} instance.
+     * </p>
+     * <p>
+     * This method may also be called from external client code to obtain a
+     * {@link Protocol} view of this {@link Analysis}.
+     * </p>
      *
-     *
-     * @param context the {@link ResultComputingContext} in which the
-     * computation is to be performed.
-     * @return the result of the computation.
-     */
-    protected abstract R computeResult(ResultComputingContext<? extends E> context);
-
-    /**
-     * Returns a {@link Protocol} which performs the same computation as this
+     * @return the {@link Protocol} that computes the result of this
      * {@link Analysis}.
-     *
-     * @return a {@link Protocol}.
      */
-    public final Protocol<R, E> toProtocol() {
-        return new ProtocolView();
-    }
-
-    /**
-     * {@link Protocol} implementation that delegates the computing to this
-     * {@link Analysis}'s {@link #computeResult(ResultComputingContext) }
-     * method.
-     */
-    private final class ProtocolView implements Protocol<R, E> {
-
-        @Override
-        public R computeResult(ResultComputingContext<? extends E> context) {
-            return Analysis.this.computeResult(context);
-        }
-
-        @Override
-        public String toString() {
-            return "ProtocolView{" + Analysis.this.toString() + '}';
-        }
-    }
+    public abstract Protocol<? extends R, ? super E> protocol();
 
     /**
      * Sets a provided result for this {@link Analysis} in the specified
@@ -222,6 +213,8 @@ public abstract class Analysis<R, E> {
             throw new NullPointerException();
         }
         lab.importResultFor(result, this);
+
+
     }
 
     /**

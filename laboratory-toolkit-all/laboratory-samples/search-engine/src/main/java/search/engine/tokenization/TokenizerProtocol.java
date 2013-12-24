@@ -4,7 +4,7 @@
  */
 package search.engine.tokenization;
 
-import edu.polytechnique.labtk.protocols.Protocol;
+import edu.polytechnique.labtk.Protocol;
 import search.engine.equipment.DocumentsEquipment;
 
 /**

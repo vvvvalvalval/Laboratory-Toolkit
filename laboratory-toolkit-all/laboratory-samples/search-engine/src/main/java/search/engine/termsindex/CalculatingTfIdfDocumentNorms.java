@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CalculatingTfIdfDocumentNorms extends Analysis<Map<Document, Double>, TermsIndexingEquipment> {
+public class CalculatingTfIdfDocumentNorms extends SimpleAnalysis<Map<Document, Double>, TermsIndexingEquipment> {
 
     @Override
     protected Map<Document, Double> computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {

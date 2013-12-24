@@ -6,6 +6,7 @@ package integer.primes;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.NavigableSet;
 import java.util.SortedSet;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CheckingIfPerfectNumber extends Analysis<Boolean, IntegerEquipment>{
+public class CheckingIfPerfectNumber extends SimpleAnalysis<Boolean, IntegerEquipment>{
 
     @Override
     protected Boolean computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

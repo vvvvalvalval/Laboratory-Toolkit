@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class TermFrequenciesCatalog {
     /**
      * Computes the frequencies of the terms as the number of occurences.
      */
-    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> RAW_FREQUENCY = new Analysis<TermDocumentWeight, TermsIndexingEquipment>() {
+    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> RAW_FREQUENCY = new SimpleAnalysis<TermDocumentWeight, TermsIndexingEquipment>() {
         @Override
         protected TermDocumentWeight computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {
             final Map<Document, TermsOccurences> termsOccurences = context.preliminaryResult(CountingTermsOccurencesInEachDocument.getInstance());
@@ -37,7 +38,7 @@ public class TermFrequenciesCatalog {
      * Computes the frequencies as 0 or 1 depending on whether the term is
      * occurs in the document.
      */
-    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> BOOLEAN_FREQUENCY = new Analysis<TermDocumentWeight, TermsIndexingEquipment>() {
+    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> BOOLEAN_FREQUENCY = new SimpleAnalysis<TermDocumentWeight, TermsIndexingEquipment>() {
         @Override
         protected TermDocumentWeight computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {
             final Map<Document, TermsOccurences> termsOccurences = context.preliminaryResult(CountingTermsOccurencesInEachDocument.getInstance());
@@ -54,7 +55,7 @@ public class TermFrequenciesCatalog {
     /**
      * Computes the frequencies using a logarithmic scale.
      */
-    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> LOGARITHMIC_FREQUENCY = new Analysis<TermDocumentWeight, TermsIndexingEquipment>() {
+    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> LOGARITHMIC_FREQUENCY = new SimpleAnalysis<TermDocumentWeight, TermsIndexingEquipment>() {
         @Override
         protected TermDocumentWeight computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {
             final Map<Document, TermsOccurences> termsOccurences = context.preliminaryResult(CountingTermsOccurencesInEachDocument.getInstance());
@@ -72,7 +73,7 @@ public class TermFrequenciesCatalog {
      * Computes the frequency of a term as the number of occurences of the term
      * divided by the total number of terms occurences in the document.
      */
-    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> NORMALIZED_FREQUENCY = new Analysis<TermDocumentWeight, TermsIndexingEquipment>() {
+    public static final Analysis<TermDocumentWeight, TermsIndexingEquipment> NORMALIZED_FREQUENCY = new SimpleAnalysis<TermDocumentWeight, TermsIndexingEquipment>() {
         @Override
         protected TermDocumentWeight computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {
             final Map<Document, TermsOccurences> termsOccurences = context.preliminaryResult(CountingTermsOccurencesInEachDocument.getInstance());

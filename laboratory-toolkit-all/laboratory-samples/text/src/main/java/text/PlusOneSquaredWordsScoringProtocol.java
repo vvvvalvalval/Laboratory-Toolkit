@@ -5,7 +5,7 @@
 package text;
 
 import edu.polytechnique.labtk.ResultComputingContext;
-import edu.polytechnique.labtk.protocols.Protocol;
+import edu.polytechnique.labtk.Protocol;
 
 /**
  *

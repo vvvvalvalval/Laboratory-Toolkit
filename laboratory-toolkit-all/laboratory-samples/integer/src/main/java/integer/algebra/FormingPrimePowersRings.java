@@ -6,6 +6,7 @@ package integer.algebra;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import integer.primes.CalculatingPrimeDecomposition;
 import java.util.Collections;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class FormingPrimePowersRings extends Analysis<Map<Integer, PrimePowerModuloNRing>, IntegerEquipment> {
+public class FormingPrimePowersRings extends SimpleAnalysis<Map<Integer, PrimePowerModuloNRing>, IntegerEquipment> {
 
     @Override
     protected Map<Integer, PrimePowerModuloNRing> computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

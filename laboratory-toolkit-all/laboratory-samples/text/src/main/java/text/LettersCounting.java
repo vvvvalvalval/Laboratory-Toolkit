@@ -6,6 +6,7 @@ package text;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Set;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class LettersCounting extends Analysis<LettersFrequencies, TextLabEquipment>{
+public class LettersCounting extends SimpleAnalysis<LettersFrequencies, TextLabEquipment>{
 
     @Override
     protected LettersFrequencies computeResult(ResultComputingContext<? extends TextLabEquipment> context) {

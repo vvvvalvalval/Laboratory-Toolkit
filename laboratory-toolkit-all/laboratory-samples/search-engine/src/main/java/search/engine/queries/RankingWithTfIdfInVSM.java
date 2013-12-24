@@ -6,6 +6,7 @@ package search.engine.queries;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import search.engine.termsindex.CalculatingTfIdf;
 import search.engine.termsindex.CalculatingTfIdfDocumentNorms;
@@ -26,7 +27,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class RankingWithTfIdfInVSM extends Analysis<QueryProcessor, TermsIndexingEquipment> {
+public class RankingWithTfIdfInVSM extends SimpleAnalysis<QueryProcessor, TermsIndexingEquipment> {
 
     private RankingWithTfIdfInVSM() {
     }

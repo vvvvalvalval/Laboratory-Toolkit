@@ -6,6 +6,7 @@ package integer.algebra;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class FormingModuloNRing extends Analysis<ModuloNRing, IntegerEquipment> {
+public class FormingModuloNRing extends SimpleAnalysis<ModuloNRing, IntegerEquipment> {
 
     @Override
     protected ModuloNRing computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

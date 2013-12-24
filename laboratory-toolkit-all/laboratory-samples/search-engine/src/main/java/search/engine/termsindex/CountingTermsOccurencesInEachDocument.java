@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CountingTermsOccurencesInEachDocument extends Analysis<Map<Document, TermsOccurences>, TermsIndexingEquipment> {
+public class CountingTermsOccurencesInEachDocument extends SimpleAnalysis<Map<Document, TermsOccurences>, TermsIndexingEquipment> {
     
     @Override
     protected Map<Document, TermsOccurences> computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {

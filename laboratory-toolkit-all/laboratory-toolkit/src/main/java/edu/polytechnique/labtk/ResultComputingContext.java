@@ -5,21 +5,28 @@
 package edu.polytechnique.labtk;
 
 import edu.polytechnique.labtk.exception.LaboratoryResultComputingCircularDependencyException;
-import edu.polytechnique.labtk.protocols.AnalysisWithProtocol;
-import edu.polytechnique.labtk.protocols.Protocol;
 
 /**
  * Context for performing the computing of the result of an {@link Analysis} in
  * the context of a particular {@link Laboratory}.
  * <p>
- * In addition to providing the {@link Analysis} the {@link Laboratory} in which
- * its result is being computed, the {@link ResultComputingContext} most
- * importantly provides means of obtaining preliminary results from other
- * {@link Analysis} in the same {@link Laboratory}. This way of obtaining
- * preliminary results should almost <em>always</em> be preferred over direct
- * invocation of the {@link Analysis#getResult} method, because it enables the
- * contextual {@link Laboratory} to monitor the dependencies between
- * {@link Analysis}.
+ * A {@link ResultComputingContext} is what is provided to the {@link Protocol}
+ * of the {@link Analysis} when the computation of its result is requested by a
+ * {@link Laboratory}. The {@link ResultComputingContext} gives access to :
+ * <ul>
+ * <li>the <em>equipment</em> instance that the {@link Laboratory} provides to
+ * the {@link Analysis} to perform its computation, which essentially consists
+ * of the data to be processed and algorithmic parameters and strategies;</li>
+ * <li><em>preliminary results</em> of other {@link Analysis}S that are required
+ * to perform the current computation. Transparently, these results are obtained
+ * from the same {@link Laboratory} context.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Intentionally, the {@link ResultComputingContext} does not reveal in what
+ * {@link Laboratory} the computation is being performed. There are good reasons
+ * for that : when requested, a {@link Protocol} should not care in what
+ * {@link Laboratory} it is to perform.
  * </p>
  * <p>
  * Note that there is <em>no reason</em> whatsoever for a client to implement
@@ -30,7 +37,7 @@ import edu.polytechnique.labtk.protocols.Protocol;
  * of an {@link AnalysisWithProtocol}.
  * </p>
  *
- * @param <E> the type of the eqpuiment of the {@link Laboratory} this
+ * @param <E> the type of the <em>equipment</em> of the {@link Laboratory} this
  * {@link ResultComputingContext} is a view of.
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  * @see Analysis
@@ -41,8 +48,8 @@ import edu.polytechnique.labtk.protocols.Protocol;
 public interface ResultComputingContext<E> {
 
     /**
-     * Returns the equipment of the {@link Laboratory} in which the result will
-     * be computed. This equipment may be used in order to retrieve input data,
+     * Returns the <em>equipment</em> of the {@link Laboratory} in which the result will
+     * be computed. This <em>equipment</em> may be used in order to retrieve input data, algorithmic parameters,
      * or references to other {@link Analysis} which results are involved in the
      * current computation.
      *

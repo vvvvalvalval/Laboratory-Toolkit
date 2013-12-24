@@ -6,6 +6,7 @@ package search.engine.queries;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.regex.Pattern;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class ObtainingQueryRunner extends Analysis<QueryRunner, QueryProcessingEquipment> {
+public class ObtainingQueryRunner extends SimpleAnalysis<QueryRunner, QueryProcessingEquipment> {
 
     private static final Pattern QUERY_TOKENIZER = Pattern.compile("\\W+");
 

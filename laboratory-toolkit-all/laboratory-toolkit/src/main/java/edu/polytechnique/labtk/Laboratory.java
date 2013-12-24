@@ -22,7 +22,8 @@ import java.util.*;
  * (obtaining preliminary results).</li>
  * <li>It triggers the computation of the results if they have not already been
  * computed, and stores the results that have been computed, making them
- * available without repeating their computation.</li>
+ * available without repeating their computation (<em>Intercept, Cache and
+ * Invoke</em> pattern).</li>
  * </ul>
  * <p>
  * A {@link Laboratory} holds an <em>equipment</em> object. The equipment object
@@ -59,7 +60,7 @@ import java.util.*;
  * @see ResultComputingContext
  * @see LabUtils
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
- * @param <E> the type of the equipment of this {@link Laboratory}.
+ * @param <E> the type of the <em>equipment</em> of this {@link Laboratory}.
  */
 public final class Laboratory<E> {
 
@@ -74,7 +75,7 @@ public final class Laboratory<E> {
     private final E equipment;
 
     /**
-     * The equipment of this {@link Laboratory}.
+     * The <em>equipment</em> of this {@link Laboratory}.
      *
      * @return the equipment of this {@link Laboratory}.
      */

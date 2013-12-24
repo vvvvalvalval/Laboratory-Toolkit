@@ -6,6 +6,7 @@ package integer.algebra;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import integer.primes.CalculatingPrimeDecomposition;
 import java.util.LinkedHashMap;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class ConstructingChineseIsomorphism extends Analysis<Isomorphism<Integer, ProductElement<Integer>>, IntegerEquipment> {
+public class ConstructingChineseIsomorphism extends SimpleAnalysis<Isomorphism<Integer, ProductElement<Integer>>, IntegerEquipment> {
 
     @Override
     protected Isomorphism<Integer, ProductElement<Integer>> computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

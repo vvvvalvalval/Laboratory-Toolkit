@@ -5,8 +5,8 @@
 package text;
 
 import edu.polytechnique.labtk.Analysis;
+import edu.polytechnique.labtk.AnalysisWithProtocol;
 import edu.polytechnique.labtk.Laboratory;
-import edu.polytechnique.labtk.protocols.AnalysisWithProtocol;
 import java.util.List;
 
 /**

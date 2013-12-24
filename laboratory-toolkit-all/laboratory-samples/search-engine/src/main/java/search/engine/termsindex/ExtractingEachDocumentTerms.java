@@ -6,6 +6,7 @@ package search.engine.termsindex;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import search.engine.equipment.Document;
 import search.engine.tokenization.Token;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class ExtractingEachDocumentTerms extends Analysis<EachDocumentTermsExtraction, TermsIndexingEquipment> {
+public class ExtractingEachDocumentTerms extends SimpleAnalysis<EachDocumentTermsExtraction, TermsIndexingEquipment> {
 
     @Override
     protected EachDocumentTermsExtraction computeResult(ResultComputingContext<? extends TermsIndexingEquipment> context) {

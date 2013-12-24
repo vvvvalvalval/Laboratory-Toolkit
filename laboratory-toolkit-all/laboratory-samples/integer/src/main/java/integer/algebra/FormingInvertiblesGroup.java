@@ -6,6 +6,7 @@ package integer.algebra;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class FormingInvertiblesGroup extends Analysis<GeneratedGroup<Integer>, IntegerEquipment> {
+public class FormingInvertiblesGroup extends SimpleAnalysis<GeneratedGroup<Integer>, IntegerEquipment> {
 
     @Override
     protected GeneratedGroup<Integer> computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

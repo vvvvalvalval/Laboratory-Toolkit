@@ -6,6 +6,7 @@ package integer.primes;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.Set;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class FormingSetOfPrimeFactors extends Analysis<Set<Integer>, IntegerEquipment> {
+public class FormingSetOfPrimeFactors extends SimpleAnalysis<Set<Integer>, IntegerEquipment> {
 
     @Override
     protected Set<Integer> computeResult(ResultComputingContext<? extends IntegerEquipment> context) {

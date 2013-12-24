@@ -6,6 +6,7 @@ package integer.primes;
 
 import edu.polytechnique.labtk.Analysis;
 import edu.polytechnique.labtk.ResultComputingContext;
+import edu.polytechnique.labtk.SimpleAnalysis;
 import integer.equipment.IntegerEquipment;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Valentin Waeselynck <valentin.waeselynck@polytechnique.edu>
  */
-public class CalculatingPrimeDecomposition extends Analysis<Map<Integer, Integer>, IntegerEquipment> {
+public class CalculatingPrimeDecomposition extends SimpleAnalysis<Map<Integer, Integer>, IntegerEquipment> {
 
     @Override
     protected Map<Integer, Integer> computeResult(ResultComputingContext<? extends IntegerEquipment> context) {
